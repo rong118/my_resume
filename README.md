@@ -1,4 +1,9 @@
 # my_resume
 ## a web nodejs app of my resume 
 
-deploy on heroku: git push heroku main
+URL: https://rongli-resume.herokuapp.com/
+
+heroku deployment command: git push heroku main
+
+
+
