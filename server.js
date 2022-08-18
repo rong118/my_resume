@@ -10,6 +10,7 @@ app.get('/', function(req, res) {
     res.render('index', {});
 });
 
-app.listen(process.env.PORT || 3000, function(){
-    console.log('Your node js server is running');
+var port = process.env.PORT || 3000
+app.listen(port, function(){
+    console.log('Your node js server is running on port: ' + port);
 });
