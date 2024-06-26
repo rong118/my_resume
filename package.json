@@ -5,12 +5,12 @@
   "main": "server.js",
   "dependencies": {
     "ejs": "^2.6.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "forever": "^4.0.3"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Rong Li",
   "license": "ISC"
 }
