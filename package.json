@@ -9,7 +9,8 @@
     "forever": "^4.0.3"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node build.js"
   },
   "author": "Rong Li",
   "license": "ISC"
