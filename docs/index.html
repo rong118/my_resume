@@ -452,6 +452,10 @@
       if (argsEl) argsEl.textContent = '';
       out.style.opacity = '0';
       out.style.transition = 'opacity 0.4s ease';
+
+      // Pre-hide child items so they don't flash before staggered reveal
+      var items = out.querySelectorAll('.timeline-item, .skill-cat');
+      items.forEach(function(item) { item.style.opacity = '0'; });
     });
 
     finalCursor.style.display = 'none';
@@ -468,6 +472,8 @@
         cmd._out.style.opacity = '1';
         var tc = cmd.querySelector('.typing-cursor');
         if (tc) tc.remove();
+        var items = cmd._out.querySelectorAll('.timeline-item, .skill-cat');
+        items.forEach(function(item) { item.style.opacity = '1'; });
       });
       skipBtn.classList.remove('visible');
       finalCursor.style.display = 'flex';
@@ -514,10 +520,31 @@
         } else {
           tc.remove();
           setTimeout(function() {
+            // Stagger-reveal child items for experience, education, skills
+            var items = cmd._out.querySelectorAll('.timeline-item, .skill-cat');
+            if (items.length > 0) {
+              items.forEach(function(item) {
+                item.style.transition = 'opacity 0.35s ease';
+              });
+            }
+
             cmd._out.style.opacity = '1';
-            setTimeout(function() {
-              typeCmd(index + 1);
-            }, SECTION_DELAY);
+
+            if (items.length > 0) {
+              var itemIndex = 0;
+              function revealItem() {
+                if (skipped || itemIndex >= items.length) {
+                  setTimeout(function() { typeCmd(index + 1); }, SECTION_DELAY);
+                  return;
+                }
+                items[itemIndex].style.opacity = '1';
+                itemIndex++;
+                setTimeout(revealItem, 300);
+              }
+              setTimeout(revealItem, 250);
+            } else {
+              setTimeout(function() { typeCmd(index + 1); }, SECTION_DELAY);
+            }
           }, CMD_DELAY);
         }
       }
