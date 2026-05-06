@@ -94,6 +94,18 @@
   .prompt-args { color: var(--fg-dim); }
   .output { padding-left: 20px; border-left: 2px solid var(--border); color: var(--fg); }
 
+  /* CRT frame — scanlines + vignette overlay on images */
+  .crt-frame {
+    position: relative; display: inline-block; flex-shrink: 0;
+    line-height: 0; border-radius: 4px;
+  }
+  .crt-frame::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+    box-shadow: inset 0 0 16px 5px rgba(0,0,0,0.35);
+  }
+
   /* Whoami header — photo left, info right */
   .whoami-row { display: flex; gap: 24px; align-items: center; }
   .whoami-img {
@@ -190,6 +202,7 @@
     .whoami-loc { color: #555; }
     .contact-label { color: #555; }
     .contact-value { color: #111; }
+    .crt-frame::after { display: none; }
     .company-logo, .edu-logo { border-color: #ccc; opacity: 1; }
     .timeline-item { border-color: #ddd; background: #fafafa; break-inside: avoid; }
     .timeline-item.open .timeline-body { max-height: none; }
@@ -233,7 +246,7 @@
       <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">whoami</span></div>
       <div class="output">
         <div class="whoami-row">
-          <img class="whoami-img" src="images/me.png" alt="Rong Li">
+          <span class="crt-frame"><img class="whoami-img" src="images/me.png" alt="Rong Li"></span>
           <div class="whoami-text">
             <div class="whoami-name">Rong Li</div>
             <div class="whoami-title">Software Engineer</div>
@@ -278,7 +291,7 @@
         <div class="timeline-item open">
           <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
             <span class="timeline-arrow">▶</span>
-            <img class="company-logo" src="images/mw.png" alt="MathWorks">
+            <span class="crt-frame"><img class="company-logo" src="images/mw.png" alt="MathWorks"></span>
             <div class="timeline-info">
               <div class="timeline-position">Software Engineer</div>
               <div class="timeline-company">MathWorks · Full-time</div>
@@ -298,7 +311,7 @@
         <div class="timeline-item open">
           <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
             <span class="timeline-arrow">▶</span>
-            <img class="company-logo" src="images/q.png" alt="Qualcomm">
+            <span class="crt-frame"><img class="company-logo" src="images/q.png" alt="Qualcomm"></span>
             <div class="timeline-info">
               <div class="timeline-position">Silicon Validation Software Engineer</div>
               <div class="timeline-company">Qualcomm · Full-time</div>
@@ -325,7 +338,7 @@
         <div class="timeline-item open">
           <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
             <span class="timeline-arrow">▶</span>
-            <img class="edu-logo" src="images/wpi.png" alt="WPI">
+            <span class="crt-frame"><img class="edu-logo" src="images/wpi.png" alt="WPI"></span>
             <div class="timeline-info">
               <div class="timeline-position">Master of Engineering (MEng) — Electrical &amp; Computer Engineering</div>
               <div class="timeline-company">Worcester Polytechnic Institute</div>
@@ -342,7 +355,7 @@
         <div class="timeline-item open">
           <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
             <span class="timeline-arrow">▶</span>
-            <img class="edu-logo" src="images/ah.png" alt="AHU">
+            <span class="crt-frame"><img class="edu-logo" src="images/ah.png" alt="AHU"></span>
             <div class="timeline-info">
               <div class="timeline-position">Bachelor of Engineering (BE) — Electronic Engineering</div>
               <div class="timeline-company">Anhui University</div>
