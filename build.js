@@ -22,8 +22,5 @@ ejs.renderFile('views/index.ejs', {}, {}, (err, html) => {
 
 copyDir('public/css', 'docs/css');
 copyDir('public/images', 'docs/images');
-fs.copyFileSync('public/terminal.html', 'docs/terminal.html');
-fs.copyFileSync('public/terminal-neofetch.html', 'docs/terminal-neofetch.html');
-fs.copyFileSync('public/terminal-full.html', 'docs/terminal-full.html');
 fs.copyFileSync('public/terminal-full-animation.html', 'docs/index.html');
 console.log('Copied assets to docs/');
