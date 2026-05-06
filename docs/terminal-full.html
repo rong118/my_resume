@@ -66,6 +66,12 @@
   .dot.yellow { background: #e0af68; }
   .dot.green { background: #9ece6a; }
   .titlebar-title { flex: 1; text-align: center; font-size: 12px; color: var(--fg-dim); margin-right: 32px; }
+  .pdf-btn {
+    font-family: var(--font); font-size: 12px; color: var(--fg-dim);
+    background: none; border: 1px solid var(--border); border-radius: 4px;
+    padding: 3px 10px; cursor: pointer; transition: color 0.2s, border-color 0.2s;
+  }
+  .pdf-btn:hover { color: var(--fg-bright); border-color: var(--fg-dim); }
 
   .body { padding: 24px 28px 32px; }
 
@@ -76,22 +82,25 @@
   .prompt-args { color: var(--fg-dim); }
   .output { padding-left: 20px; border-left: 2px solid var(--border); color: var(--fg); }
 
-  /* Neofetch header */
-  .neofetch { display: flex; gap: 28px; align-items: flex-start; }
-  .neofetch-img {
-    flex-shrink: 0; width: 130px; height: 130px; border-radius: 4px;
+  /* Whoami header — photo left, info right */
+  .whoami-row { display: flex; gap: 24px; align-items: center; }
+  .whoami-img {
+    flex-shrink: 0; width: 110px; height: 110px; border-radius: 4px;
     object-fit: cover; border: 2px solid var(--border);
     box-shadow: 0 0 20px rgba(158,206,106,0.10);
     filter: saturate(0.82) brightness(0.94);
   }
-  .neofetch-info { display: grid; grid-template-columns: auto 1fr; gap: 2px 16px; font-size: 13px; line-height: 1.7; padding-top: 2px; }
-  .nf-key { color: var(--green); font-weight: 500; white-space: nowrap; }
-  .nf-sep { color: var(--fg-dim); }
-  .nf-val { color: var(--fg); }
-  .nf-val a { color: var(--blue); text-decoration: none; }
-  .nf-val a:hover { text-decoration: underline; }
-  .nf-hostname { color: var(--magenta); font-weight: 600; font-size: 14px; grid-column: 2; margin-bottom: 6px; }
-  .nf-separator { color: var(--fg-dim); grid-column: 1 / -1; letter-spacing: 2px; margin-bottom: 4px; }
+  .whoami-text { flex: 1; }
+  .whoami-name { font-size: 20px; font-weight: 700; color: var(--fg-bright); }
+  .whoami-title { color: var(--blue); margin-top: 2px; }
+  .whoami-loc { color: var(--fg-dim); font-size: 13px; margin-top: 2px; }
+
+  /* Contact grid */
+  .contact-grid { display: grid; grid-template-columns: auto 1fr; gap: 3px 16px; }
+  .contact-label { color: var(--fg-dim); }
+  .contact-value { color: var(--fg); }
+  .contact-value a { color: var(--blue); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
 
   /* Summary */
   .summary-text { color: var(--fg); }
@@ -147,22 +156,10 @@
   .cursor { display: inline-block; width: 10px; height: 20px; background: var(--fg); animation: blink 1s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  /* Education */
-  .edu-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    background: var(--bg-alt); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
-  }
-  .edu-logo {
-    width: 36px; height: 36px; border-radius: 4px; object-fit: contain;
+  /* Education — reuses timeline styles */
+  .edu-logo { width: 36px; height: 36px; border-radius: 4px; object-fit: contain;
     border: 1px solid var(--border); flex-shrink: 0;
-    opacity: 0.85; background: rgba(255,255,255,0.02);
-  }
-  .edu-info { flex: 1; min-width: 0; }
-  .edu-degree { font-weight: 600; color: var(--fg-bright); }
-  .edu-school { color: var(--blue); margin-top: 2px; }
-  .edu-meta { color: var(--fg-dim); font-size: 13px; margin-top: 4px; }
-  .edu-courses { color: var(--fg-dim); font-size: 13px; margin-top: 4px; }
+    opacity: 0.85; background: rgba(255,255,255,0.02); }
 
   /* Print */
   @media print {
@@ -175,10 +172,12 @@
     .prompt-cmd { color: #111; }
     .prompt-args { color: #555; }
     .output { border-left-color: #ccc; color: #111; }
-    .neofetch-img { border-color: #ccc; box-shadow: none; filter: none; }
-    .nf-key { color: #2255aa; }
-    .nf-val { color: #111; }
-    .nf-hostname { color: #2255aa; }
+    .whoami-img { border-color: #ccc; box-shadow: none; filter: none; }
+    .whoami-name { color: #111; }
+    .whoami-title { color: #2255aa; }
+    .whoami-loc { color: #555; }
+    .contact-label { color: #555; }
+    .contact-value { color: #111; }
     .company-logo, .edu-logo { border-color: #ccc; opacity: 1; }
     .timeline-item { border-color: #ddd; background: #fafafa; break-inside: avoid; }
     .timeline-item.open .timeline-body { max-height: none; }
@@ -187,7 +186,8 @@
     .timeline-arrow { display: none; }
     .skill-tag { background: #eee; color: #2255aa; border-color: #ccc; }
     .cursor-line { display: none; }
-    .nf-val a { color: #2255aa; }
+    .pdf-btn { display: none; }
+    .contact-value a { color: #2255aa; }
     a { color: #2255aa; }
   }
 
@@ -196,13 +196,12 @@
     body { padding: 0; }
     .terminal { border-radius: 0; border: none; }
     .body { padding: 16px; }
-    .neofetch { flex-direction: column; align-items: center; }
-    .neofetch-img { width: 100px; height: 100px; }
-    .neofetch-info { font-size: 12px; gap: 1px 10px; }
+    .whoami-row { flex-direction: column; align-items: flex-start; }
+    .whoami-img { width: 90px; height: 90px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 4px; }
     .timeline-header { flex-wrap: wrap; }
     .timeline-date { margin-top: 4px; }
-    .company-logo { width: 32px; height: 32px; }
-    .edu-logo { width: 28px; height: 28px; }
+    .company-logo, .edu-logo { width: 28px; height: 28px; }
   }
 </style>
 </head>
@@ -212,27 +211,38 @@
   <div class="titlebar">
     <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
     <span class="titlebar-title">rongli@resume — bash — 80×24</span>
+    <button class="pdf-btn" onclick="window.print()" title="Save as PDF">↓ PDF</button>
   </div>
   <div class="body">
 
-    <!-- neofetch -->
+    <!-- whoami: photo left, info right -->
     <div class="cmd">
-      <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">neofetch</span></div>
-      <div class="output" style="border-left-color:transparent;padding-left:0">
-        <div class="neofetch">
-          <img class="neofetch-img" src="images/me.png" alt="Rong Li">
-          <div class="neofetch-info">
-            <span class="nf-key"></span><span class="nf-hostname">rongli@resume</span>
-            <span class="nf-key"></span><span class="nf-separator">──────────────</span>
-            <span class="nf-key">Name</span><span class="nf-sep">:</span><span class="nf-val">Rong Li</span>
-            <span class="nf-key">Role</span><span class="nf-sep">:</span><span class="nf-val">Software Engineer</span>
-            <span class="nf-key">Location</span><span class="nf-sep">:</span><span class="nf-val">Greater Boston Area</span>
-            <span class="nf-key">Experience</span><span class="nf-sep">:</span><span class="nf-val">10+ years</span>
-            <span class="nf-key">Email</span><span class="nf-sep">:</span><span class="nf-val"><a href="mailto:rongli.work@gmail.com">rongli.work@gmail.com</a></span>
-            <span class="nf-key">Phone</span><span class="nf-sep">:</span><span class="nf-val">1-508-596-9648</span>
-            <span class="nf-key">LinkedIn</span><span class="nf-sep">:</span><span class="nf-val"><a href="https://www.linkedin.com/in/rongliwork/" target="_blank" rel="noopener">linkedin.com/in/rongliwork</a></span>
-            <span class="nf-key">GitHub</span><span class="nf-sep">:</span><span class="nf-val"><a href="https://github.com/rong118" target="_blank" rel="noopener">github.com/rong118</a></span>
+      <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">whoami</span></div>
+      <div class="output">
+        <div class="whoami-row">
+          <img class="whoami-img" src="images/me.png" alt="Rong Li">
+          <div class="whoami-text">
+            <div class="whoami-name">Rong Li</div>
+            <div class="whoami-title">Software Engineer</div>
+            <div class="whoami-loc">Greater Boston Area</div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- contact -->
+    <div class="cmd">
+      <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">contact</span> <span class="prompt-args">--list</span></div>
+      <div class="output">
+        <div class="contact-grid">
+          <span class="contact-label">email</span>
+          <span class="contact-value"><a href="mailto:rongli.work@gmail.com">rongli.work@gmail.com</a></span>
+          <span class="contact-label">phone</span>
+          <span class="contact-value" style="cursor:pointer" title="Click to reveal" onclick="var e=this;if(e.dataset.revealed)return;e.dataset.revealed=1;e.textContent=e.dataset.full;e.style.cursor='default'" data-full="1-508-596-9648">1-508-•••-••••</span>
+          <span class="contact-label">linkedin</span>
+          <span class="contact-value"><a href="https://www.linkedin.com/in/rongliwork/" target="_blank" rel="noopener">linkedin.com/in/rongliwork</a></span>
+          <span class="contact-label">github</span>
+          <span class="contact-value"><a href="https://github.com/rong118" target="_blank" rel="noopener">github.com/rong118</a></span>
         </div>
       </div>
     </div>
@@ -299,23 +309,37 @@
       <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">education</span> <span class="prompt-args">--list</span></div>
       <div class="output" style="border-left-color:transparent;padding-left:0">
 
-        <div class="edu-item">
-          <img class="edu-logo" src="images/wpi.png" alt="WPI">
-          <div class="edu-info">
-            <div class="edu-degree">Master of Engineering (MEng) — Electrical &amp; Computer Engineering</div>
-            <div class="edu-school">Worcester Polytechnic Institute</div>
-            <div class="edu-meta">2011 – 2013</div>
-            <div class="edu-courses">Computer Architecture, Software Engineering, Operating Systems, Computer Networks, Multimedia Systems, FPGA Design, VLSI</div>
+        <div class="timeline-item open">
+          <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
+            <span class="timeline-arrow">▶</span>
+            <img class="edu-logo" src="images/wpi.png" alt="WPI">
+            <div class="timeline-info">
+              <div class="timeline-position">Master of Engineering (MEng) — Electrical &amp; Computer Engineering</div>
+              <div class="timeline-company">Worcester Polytechnic Institute</div>
+            </div>
+            <div class="timeline-date">2011 – 2013</div>
+          </div>
+          <div class="timeline-body">
+            <div class="timeline-body-inner">
+              <p style="color:var(--fg-dim)">Relevant coursework: Computer Architecture, Software Engineering, Operating Systems, Computer Networks, Multimedia Systems, FPGA Design, VLSI</p>
+            </div>
           </div>
         </div>
 
-        <div class="edu-item">
-          <img class="edu-logo" src="images/ah.png" alt="AHU">
-          <div class="edu-info">
-            <div class="edu-degree">Bachelor of Engineering (BE) — Electronic Engineering</div>
-            <div class="edu-school">Anhui University</div>
-            <div class="edu-meta">2005 – 2009</div>
-            <div class="edu-courses">Data Structures &amp; Algorithms, Embedded Software Development, Digital/Analog Circuits, Image Signal Processing</div>
+        <div class="timeline-item open">
+          <div class="timeline-header" onclick="toggleTimeline(this.parentElement)">
+            <span class="timeline-arrow">▶</span>
+            <img class="edu-logo" src="images/ah.png" alt="AHU">
+            <div class="timeline-info">
+              <div class="timeline-position">Bachelor of Engineering (BE) — Electronic Engineering</div>
+              <div class="timeline-company">Anhui University</div>
+            </div>
+            <div class="timeline-date">2005 – 2009</div>
+          </div>
+          <div class="timeline-body">
+            <div class="timeline-body-inner">
+              <p style="color:var(--fg-dim)">Relevant coursework: Data Structures &amp; Algorithms, Embedded Software Development, Digital/Analog Circuits, Image Signal Processing</p>
+            </div>
           </div>
         </div>
 
@@ -327,42 +351,34 @@
       <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">skills</span> <span class="prompt-args">--all</span></div>
       <div class="output">
         <div class="skill-cat">
+          <div class="skill-cat-title">CI/CD & DevOps</div>
+          <div class="skill-tags"><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Jenkins</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">Terraform</span></div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Cloud & Infrastructure</div>
+          <div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Linux</span></div>
+        </div>
+        <div class="skill-cat">
           <div class="skill-cat-title">Programming Languages</div>
-          <div class="skill-tags"><span class="skill-tag">C++</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Golang</span><span class="skill-tag">Perl</span><span class="skill-tag">Python</span><span class="skill-tag">Shell</span><span class="skill-tag">Java</span></div>
-        </div>
-        <div class="skill-cat">
-          <div class="skill-cat-title">Web Development</div>
-          <div class="skill-tags"><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express</span><span class="skill-tag">WordPress</span><span class="skill-tag">HTML/CSS</span><span class="skill-tag">Spring</span></div>
-        </div>
-        <div class="skill-cat">
-          <div class="skill-cat-title">Databases</div>
-          <div class="skill-tags"><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">SQLite</span><span class="skill-tag">MongoDB</span></div>
-        </div>
-        <div class="skill-cat">
-          <div class="skill-cat-title">Cloud Platforms</div>
-          <div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Heroku</span></div>
+          <div class="skill-tags"><span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span><span class="skill-tag">Golang</span><span class="skill-tag">Shell</span></div>
         </div>
         <div class="skill-cat">
           <div class="skill-cat-title">Build Tools</div>
-          <div class="skill-tags"><span class="skill-tag">Make</span><span class="skill-tag">CMake</span><span class="skill-tag">Maven</span><span class="skill-tag">Scons</span><span class="skill-tag">Gradle</span><span class="skill-tag">Gulp</span></div>
+          <div class="skill-tags"><span class="skill-tag">Make</span><span class="skill-tag">CMake</span><span class="skill-tag">Maven</span><span class="skill-tag">Gradle</span></div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title">DevOps</div>
-          <div class="skill-tags"><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Jenkins</span></div>
+          <div class="skill-cat-title">Web Development</div>
+          <div class="skill-tags"><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express</span><span class="skill-tag">HTML/CSS</span></div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Databases</div>
+          <div class="skill-tags"><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MongoDB</span></div>
         </div>
         <div class="skill-cat">
           <div class="skill-cat-title">Version Control</div>
           <div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">Perforce</span></div>
         </div>
       </div>
-    </div>
-
-    <!-- awards -->
-    <div class="cmd">
-      <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">awards</span> <span class="prompt-args">--list</span></div>
-      <div class="output"><ul class="simple-list">
-        <li><span class="highlight">Qualcomm Employee Star</span> <span style="color:var(--fg-dim)">(04/2017, 09/2015)</span></li>
-      </ul></div>
     </div>
 
     <!-- languages -->
