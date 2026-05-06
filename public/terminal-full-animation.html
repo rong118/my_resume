@@ -218,15 +218,40 @@
 
   /* Responsive */
   @media (max-width: 600px) {
-    body { padding: 0; }
+    body { padding: 0; font-size: 15px; }
     .terminal { border-radius: 0; border: none; }
-    .body { padding: 16px; }
-    .whoami-row { flex-direction: column; align-items: flex-start; }
-    .whoami-img { width: 90px; height: 90px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 4px; }
-    .timeline-header { flex-wrap: wrap; }
-    .timeline-date { margin-top: 4px; }
-    .company-logo, .edu-logo { width: 28px; height: 28px; }
+    .body { padding: 14px 12px 24px; }
+    .titlebar-title { display: none; }
+    .titlebar { padding: 10px 12px; }
+    .dot { width: 10px; height: 10px; }
+    .pdf-btn, .skip-btn { font-size: 11px; padding: 2px 8px; }
+
+    .cmd { margin-bottom: 22px; }
+    .prompt { font-size: 13px; flex-wrap: wrap; }
+    .output { padding-left: 12px; }
+
+    .whoami-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .whoami-img { width: 80px; height: 80px; }
+    .whoami-name { font-size: 18px; }
+
+    .contact-grid { grid-template-columns: 1fr; gap: 6px; }
+    .contact-label { color: var(--fg-dim); font-size: 12px; }
+    .contact-value { font-size: 14px; word-break: break-all; }
+
+    .timeline-header { gap: 10px; padding: 12px; }
+    .timeline-arrow { font-size: 10px; margin-top: 4px; }
+    .timeline-position { font-size: 14px; }
+    .timeline-company { font-size: 13px; }
+    .timeline-meta { font-size: 12px; }
+    .timeline-date { font-size: 12px; width: 100%; margin-top: 2px; }
+    .timeline-body-inner { padding: 0 10px 14px 24px; font-size: 13px; }
+    .timeline-body-inner li { margin-bottom: 8px; }
+
+    .company-logo, .edu-logo { width: 30px; height: 30px; }
+    .skill-cat-title { font-size: 13px; }
+    .skill-tag { font-size: 11px; padding: 2px 8px; }
+
+    .cursor-line { margin-top: 16px; }
   }
 </style>
 </head>
