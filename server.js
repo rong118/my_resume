@@ -1,16 +1,15 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 
-app.set('/views', path.join(__dirname, 'views'));
-app.use(express.static(__dirname + '/docs'));
-app.set('view engine', 'ejs');
+const app = express();
 
-app.get('/', function(req, res) {
-    res.render('index', {});
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'terminal-full-animation.html'));
 });
 
-var port = process.env.PORT || 3000
-app.listen(port, function(){
-    console.log('Your node js server is running on port: ' + port);
+app.use(express.static(path.join(__dirname, 'public')));
+
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log('Dev server running on port: ' + port);
 });

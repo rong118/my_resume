@@ -1,4 +1,3 @@
-const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 
@@ -14,13 +13,7 @@ function copyDir(src, dest) {
   }
 }
 
-ejs.renderFile('views/index.ejs', {}, {}, (err, html) => {
-  if (err) throw err;
-  fs.writeFileSync('docs/original.html', html);
-  console.log('Generated docs/original.html');
-});
-
 copyDir('public/css', 'docs/css');
 copyDir('public/images', 'docs/images');
 fs.copyFileSync('public/terminal-full-animation.html', 'docs/index.html');
-console.log('Copied assets to docs/');
+console.log('Built docs/ for GitHub Pages deployment.');
