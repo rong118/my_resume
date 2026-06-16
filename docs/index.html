@@ -32,7 +32,7 @@
     background: #0f111a;
     color: var(--fg);
     font-family: var(--font);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.75;
     min-height: 100vh;
     display: flex;
@@ -65,15 +65,15 @@
   .dot.red { background: #f7768e; }
   .dot.yellow { background: #e0af68; }
   .dot.green { background: #9ece6a; }
-  .titlebar-title { flex: 1; text-align: center; font-size: 12px; color: var(--fg-dim); margin-right: 32px; }
+  .titlebar-title { flex: 1; text-align: center; font-size: 14px; color: var(--fg-dim); margin-right: 32px; }
   .pdf-btn {
-    font-family: var(--font); font-size: 12px; color: var(--fg-dim);
+    font-family: var(--font); font-size: 14px; color: var(--fg-dim);
     background: none; border: 1px solid var(--border); border-radius: 4px;
     padding: 3px 10px; cursor: pointer; transition: color 0.2s, border-color 0.2s;
   }
   .pdf-btn:hover { color: var(--fg-bright); border-color: var(--fg-dim); }
   .skip-btn {
-    font-family: var(--font); font-size: 12px; color: var(--yellow);
+    font-family: var(--font); font-size: 14px; color: var(--yellow);
     background: none; border: 1px solid rgba(224,175,104,0.3); border-radius: 4px;
     padding: 3px 10px; cursor: pointer; transition: color 0.2s, border-color 0.2s;
     display: none;
@@ -117,7 +117,7 @@
   .whoami-text { flex: 1; }
   .whoami-name { font-size: 20px; font-weight: 700; color: var(--fg-bright); }
   .whoami-title { color: var(--blue); margin-top: 2px; }
-  .whoami-loc { color: var(--fg-dim); font-size: 13px; margin-top: 2px; }
+  .whoami-loc { color: var(--fg-dim); font-size: 14px; margin-top: 2px; }
 
   /* Contact grid */
   .contact-grid { display: grid; grid-template-columns: auto 1fr; gap: 3px 16px; }
@@ -145,13 +145,13 @@
     opacity: 0.85; background: rgba(255,255,255,0.02);
   }
   .timeline-header { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; }
-  .timeline-arrow { color: var(--fg-dim); font-size: 12px; margin-top: 3px; transition: transform 0.2s; flex-shrink: 0; }
+  .timeline-arrow { color: var(--fg-dim); font-size: 14px; margin-top: 3px; transition: transform 0.2s; flex-shrink: 0; }
   .timeline-item.open .timeline-arrow { transform: rotate(90deg); color: var(--blue); }
   .timeline-info { flex: 1; min-width: 0; }
   .timeline-position { font-weight: 600; color: var(--fg-bright); }
   .timeline-company { color: var(--blue); margin-top: 2px; }
-  .timeline-meta { color: var(--fg-dim); font-size: 13px; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .timeline-date { color: var(--yellow); font-size: 13px; white-space: nowrap; margin-top: 2px; }
+  .timeline-meta { color: var(--fg-dim); font-size: 14px; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .timeline-date { color: var(--yellow); font-size: 14px; white-space: nowrap; margin-top: 2px; }
   .timeline-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
   .timeline-item.open .timeline-body { max-height: 600px; }
   .timeline-body-inner { padding: 0 16px 16px 44px; color: var(--fg); }
@@ -164,7 +164,7 @@
   .skill-cat-title { color: var(--cyan); font-weight: 500; margin-bottom: 6px; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .skill-tag {
-    font-family: var(--font); font-size: 12px; padding: 3px 10px; border-radius: 4px;
+    font-family: var(--font); font-size: 14px; padding: 3px 10px; border-radius: 4px;
     background: rgba(122,162,247,0.1); color: var(--blue);
     border: 1px solid rgba(122,162,247,0.2); white-space: nowrap;
   }
@@ -185,7 +185,7 @@
   body.show-zh .lang-en { display: none; }
   body.show-zh .lang-zh { display: revert; }
   .lang-btn {
-    font-family: var(--font); font-size: 12px; color: var(--fg-dim);
+    font-family: var(--font); font-size: 14px; color: var(--fg-dim);
     background: none; border: 1px solid var(--border); border-radius: 4px;
     padding: 3px 10px; cursor: pointer; transition: color 0.2s, border-color 0.2s;
   }
@@ -200,7 +200,7 @@
   /* Print */
   @media print {
     body::after { display: none; }
-    body { background: #fff; color: #111; padding: 0; font-size: 11px; line-height: 1.5; }
+    body { background: #fff; color: #111; padding: 0; font-size: 12px; line-height: 1.5; }
     .terminal { max-width: 100%; border: none; box-shadow: none; border-radius: 0; background: #fff; }
     .titlebar { display: none; }
     .body { padding: 16px 0; }
@@ -230,16 +230,16 @@
 
   /* Responsive */
   @media (max-width: 600px) {
-    body { padding: 0; font-size: 15px; }
+    body { padding: 0; font-size: 16px; }
     .terminal { border-radius: 0; border: none; }
     .body { padding: 14px 12px 24px; }
     .titlebar-title { display: none; }
     .titlebar { padding: 10px 12px; }
     .dot { width: 10px; height: 10px; }
-    .pdf-btn, .skip-btn { font-size: 11px; padding: 2px 8px; }
+    .pdf-btn, .skip-btn { font-size: 12px; padding: 2px 8px; }
 
     .cmd { margin-bottom: 22px; }
-    .prompt { font-size: 13px; flex-wrap: wrap; }
+    .prompt { font-size: 14px; flex-wrap: wrap; }
     .output { padding-left: 12px; }
 
     .whoami-row { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -247,21 +247,21 @@
     .whoami-name { font-size: 18px; }
 
     .contact-grid { grid-template-columns: 1fr; gap: 6px; }
-    .contact-label { color: var(--fg-dim); font-size: 12px; }
+    .contact-label { color: var(--fg-dim); font-size: 14px; }
     .contact-value { font-size: 14px; word-break: break-all; }
 
     .timeline-header { flex-wrap: wrap; gap: 6px 10px; padding: 12px; }
     .timeline-arrow { font-size: 10px; margin-top: 4px; }
     .timeline-position { font-size: 14px; }
-    .timeline-company { font-size: 13px; }
-    .timeline-meta { font-size: 12px; }
-    .timeline-date { font-size: 12px; flex-basis: 100%; margin-left: 22px; margin-top: 0; }
-    .timeline-body-inner { padding: 0 10px 14px 24px; font-size: 13px; }
+    .timeline-company { font-size: 14px; }
+    .timeline-meta { font-size: 14px; }
+    .timeline-date { font-size: 14px; flex-basis: 100%; margin-left: 22px; margin-top: 0; }
+    .timeline-body-inner { padding: 0 10px 14px 24px; font-size: 14px; }
     .timeline-body-inner li { margin-bottom: 8px; }
 
     .company-logo, .edu-logo { width: 30px; height: 30px; }
-    .skill-cat-title { font-size: 13px; }
-    .skill-tag { font-size: 11px; padding: 2px 8px; }
+    .skill-cat-title { font-size: 14px; }
+    .skill-tag { font-size: 12px; padding: 2px 8px; }
 
     .cursor-line { margin-top: 16px; }
   }
@@ -330,7 +330,7 @@
             <span class="timeline-arrow">▶</span>
             <span class="crt-frame"><img class="company-logo" src="images/mw.png" alt="MathWorks"></span>
             <div class="timeline-info">
-              <div class="timeline-position"><span class="lang-en">Software Engineer</span><span class="lang-zh">软件工程师</span></div>
+              <div class="timeline-position"><span class="lang-en">Software Engineer, Dev Infrastructure &amp; Platform</span><span class="lang-zh">软件工程师，开发基础设施与平台</span></div>
               <div class="timeline-company"><span class="lang-en">MathWorks · Full-time</span><span class="lang-zh">MathWorks · 全职</span></div>
               <div class="timeline-meta"><span class="lang-en">Greater Boston Area</span><span class="lang-zh">大波士顿地区</span></div>
             </div>
@@ -457,8 +457,8 @@
     <div class="cmd">
       <div class="prompt"><span class="prompt-symbol">$</span><span class="prompt-cmd">languages</span> <span class="prompt-args">--list</span></div>
       <div class="output"><ul class="simple-list">
-        <li><span class="highlight lang-en">Mandarin</span><span class="highlight lang-zh">普通话</span> <span class="lang-en" style="color:var(--fg-dim)">(Native)</span><span class="lang-zh" style="color:var(--fg-dim)">（母语）</span></li>
         <li><span class="highlight lang-en">English</span><span class="highlight lang-zh">英语</span> <span class="lang-en" style="color:var(--fg-dim)">(Professional)</span><span class="lang-zh" style="color:var(--fg-dim)">（专业水平）</span></li>
+        <li><span class="highlight lang-en">Mandarin</span><span class="highlight lang-zh">普通话</span> <span class="lang-en" style="color:var(--fg-dim)">(Native)</span><span class="lang-zh" style="color:var(--fg-dim)">（母语）</span></li>
       </ul></div>
     </div>
 
